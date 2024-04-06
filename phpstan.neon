@@ -1,0 +1,7 @@
+includes:
+    - extension.neon
+
+parameters:
+    paths:
+        - extension-ecs.php
+        - extension-rector.php

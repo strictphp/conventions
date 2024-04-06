@@ -1,0 +1,43 @@
+{
+    "name": "strictphp/conventions",
+    "description": "Our code conventions forced by PHPStan, Easy Coding Standard, RectorPHP and appropriate custom rules and configs.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Martin Kluska",
+            "email": "martin@kluska.cz"
+        }
+    ],
+    "scripts": {
+        "analyse": "./vendor/bin/phpstan",
+        "check": [
+            "@lint",
+            "@test",
+            "@analyse"
+        ],
+        "lint": [
+            "@lint:check",
+            "@lint:upgrade"
+        ],
+        "lint:check": "./vendor/bin/ecs",
+        "lint:fix": "./vendor/bin/ecs --fix",
+        "lint:stan": "./vendor/bin/phpstan",
+        "lint:upgrade": "vendor/bin/rector process",
+        "lint:upgrade:check": "vendor/bin/rector process --dry-run",
+        "test": "./vendor/bin/phpunit",
+        "test:coverage": "./vendor/bin/phpunit --coverage-text"
+    },
+    "require": {
+        "php": ">=8.2",
+        "phpstan/phpstan": "^1.10",
+        "phpstan/phpstan-deprecation-rules": "^1.0.0",
+        "phpstan/phpstan-mockery": "^1.1",
+        "phpstan/phpstan-phpunit": "^1.3",
+        "phpunit/phpunit": "^9.6",
+        "rector/rector": "^1.0",
+        "symplify/easy-coding-standard": "^12.1"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
