@@ -17,7 +17,7 @@
             "@analyse"
         ],
         "lint": [
-            "@lint:check",
+            "@lint:fix",
             "@lint:upgrade"
         ],
         "lint:check": "./vendor/bin/ecs",
@@ -36,8 +36,21 @@
         "phpstan/phpstan-phpunit": "^1.3",
         "phpunit/phpunit": "^9.6",
         "rector/rector": "^1.0",
-        "symplify/easy-coding-standard": "^12.1"
+        "symplify/easy-coding-standard": "^12.1",
+        "phpstan/extension-installer": "^1.3"
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "extra": {
+        "phpstan": {
+            "includes": [
+                "extension.neon"
+            ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    }
 }

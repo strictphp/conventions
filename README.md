@@ -31,6 +31,8 @@ Before installing, please ensure your environment meets the following requiremen
 
 - PHP version 8.1 or higher.
 - Composer
+- Enabled [Extension installer for PHPStan](https://github.com/phpstan/extension-installer) - it is installed by our
+  package to allow extension discovery.
 
 ## Installation
 
@@ -45,19 +47,6 @@ This will install the package as a development dependency.
 ## Getting Started
 
 After installation, you can extend the provided configurations to suit your project's specific needs.
-
-### Integrating PHPStan
-
-For PHPStan, create a `phpstan.neon` file in your project's root directory with the following content to integrate our
-conventions:
-
-```neon
-includes:
-    - vendor/strictphp/conventions/phpstan.neon
-```
-
-PHPStan will then automatically include your local configurations for ECS and Rector in its analysis, enhancing the code
-quality checks.
 
 ### Setting Up Easy Coding Standard
 
@@ -78,7 +67,7 @@ return ECSConfig::configure()
         __DIR__ . '/tests',
     ])
     // This is required to include the StrictPHP Conventions
-    ->withSets([__DIR__ . '/vendor/strictphp/conventions/config/ecs.php']);
+    ->withSets([__DIR__ . '/vendor/strictphp/conventions/extension-ecs.php']);
 ```
 
 ### Configuring RectorPHP
@@ -101,9 +90,19 @@ return RectorConfig::configure()
     ])
     // This is required to include the StrictPHP Conventions
     ->withSets([
-        __DIR__ . '/vendor/strictphp/conventions/config/rector.php'
+        __DIR__ . '/vendor/strictphp/conventions/extension-rector.php'
     ]);
 ```
 
-This setup ensures that your project is aligned with StrictPHP Conventions, leveraging the combined power of these tools
-to maintain high-quality code standards.
+### Integrating PHPStan (manual)
+
+For PHPStan, create a `phpstan.neon` file in your project's root directory with the following content to integrate our
+conventions:
+
+```neon
+includes:
+    - vendor/strictphp/conventions/extension.neon
+```
+
+PHPStan will then automatically include your local configurations for ECS and Rector in its analysis, enhancing the code
+quality checks.
