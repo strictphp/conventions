@@ -63,6 +63,7 @@ configuration:
 declare(strict_types=1);
 
 use Symplify\EasyCodingStandard\Config\ECSConfig;
+use StrictPhp\Conventions\ExtensionFiles;
 
 return ECSConfig::configure()
     ->withRootFiles()
@@ -71,7 +72,7 @@ return ECSConfig::configure()
         __DIR__ . '/tests',
     ])
     // This is required to include the StrictPHP Conventions
-    ->withSets([__DIR__ . '/vendor/strictphp/conventions/extension-ecs.php']);
+    ->withSets([ExtensionFiles::Ecs]);
 ```
 
 ### Configuring RectorPHP
@@ -85,6 +86,7 @@ your configuration :
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
+use StrictPhp\Conventions\ExtensionFiles;
 
 return RectorConfig::configure()
     ->withRootFiles()
@@ -93,9 +95,7 @@ return RectorConfig::configure()
         __DIR__ . '/tests',
     ])
     // This is required to include the StrictPHP Conventions
-    ->withSets([
-        __DIR__ . '/vendor/strictphp/conventions/extension-rector.php'
-    ]);
+    ->withSets([ExtensionFiles::Rector]);
 ```
 
 ### Integrating PHPStan (manual)

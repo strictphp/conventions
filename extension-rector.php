@@ -14,8 +14,5 @@ return RectorConfig::configure()
     ->withConfiguredRule(BooleanInBooleanNotRuleFixerRector::class, [
         BooleanInBooleanNotRuleFixerRector::TREAT_AS_NON_EMPTY => false,
     ])
-    ->withSkip([
-        NewlineAfterStatementRector::class,
-        LocallyCalledStaticMethodToNonStaticRector::class,
-    ]);
+    ->withSkip([NewlineAfterStatementRector::class, LocallyCalledStaticMethodToNonStaticRector::class]);
 

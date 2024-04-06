@@ -9,6 +9,11 @@
             "email": "martin@kluska.cz"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "StrictPhp\\Conventions\\": "src/"
+        }
+    },
     "scripts": {
         "analyse": "./vendor/bin/phpstan",
         "check": [
