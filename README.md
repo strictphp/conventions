@@ -42,7 +42,11 @@ To incorporate StrictPHP Conventions into your project, simply run the following
 composer require strictphp/conventions --dev
 ```
 
-This will install the package as a development dependency.
+This will install the package as a development dependency. You will be asked to confirm the installation of the plugin:
+
+> Do you trust "phpstan/extension-installer" to execute code and wish to enable it now? (yes/no) [y]:
+
+Type `y` to use all the extensions provided by the package.
 
 ## Getting Started
 
