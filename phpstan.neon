@@ -1,7 +1,8 @@
-includes:
-    - extension.neon
-
 parameters:
-    paths:
-        - extension-ecs.php
-        - extension-rector.php
+  level: max
+  paths:
+      - src
+      - ecs.php
+      - rector.php
+      - extension-ecs.php
+      - extension-rector.php

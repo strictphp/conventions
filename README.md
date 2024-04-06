@@ -63,7 +63,6 @@ configuration:
 declare(strict_types=1);
 
 use Symplify\EasyCodingStandard\Config\ECSConfig;
-use StrictPhp\Conventions\ExtensionFiles;
 
 return ECSConfig::configure()
     ->withRootFiles()
@@ -72,7 +71,7 @@ return ECSConfig::configure()
         __DIR__ . '/tests',
     ])
     // This is required to include the StrictPHP Conventions
-    ->withSets([ExtensionFiles::Ecs]);
+    ->withSets([\StrictPhp\Conventions\ExtensionFiles::Ecs]);
 ```
 
 ### Configuring RectorPHP
@@ -86,7 +85,6 @@ your configuration :
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
-use StrictPhp\Conventions\ExtensionFiles;
 
 return RectorConfig::configure()
     ->withRootFiles()
@@ -95,18 +93,20 @@ return RectorConfig::configure()
         __DIR__ . '/tests',
     ])
     // This is required to include the StrictPHP Conventions
-    ->withSets([ExtensionFiles::Rector]);
+    ->withSets([\StrictPhp\Conventions\ExtensionFiles::Rector]);
 ```
 
-### Integrating PHPStan (manual)
+### Integrating PHPStan
 
-For PHPStan, create a `phpstan.neon` file in your project's root directory with the following content to integrate our
-conventions:
+It is required you to use phpstan extension installer to install the required extensions. This is recommended setup:
 
 ```neon
-includes:
-    - vendor/strictphp/conventions/extension.neon
+parameters:
+  level: max
+  paths:
+      - src
+      - ecs.php
+      - rector.php
+      - extension-ecs.php
+      - extension-rector.php
 ```
-
-PHPStan will then automatically include your local configurations for ECS and Rector in its analysis, enhancing the code
-quality checks.
