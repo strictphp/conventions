@@ -40,7 +40,7 @@ To incorporate StrictPHP Conventions into your project, simply run the following
 composer require strictphp/conventions --dev
 ```
 
-This will install the package as a development dependency..
+This will install the package as a development dependency.
 
 ## Getting Started
 
