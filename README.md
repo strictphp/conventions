@@ -39,10 +39,10 @@ Before installing, please ensure your environment meets the following requiremen
 
 **Only latest major version of this package is maintained.**
 
-| Compatibility | PHPUnit | PHP  |
-|---------------|---------|------|
-| 1.x           | 10/11   | 8.1+ |
-| 0.x           | 9       | 8.1+ |
+| Version | PHPUnit | PHP  |
+|---------|---------|------|
+| 1.x     | 10/11   | 8.1+ |
+| 0.x     | 9       | 8.1+ |
 
 ## Installation
 
