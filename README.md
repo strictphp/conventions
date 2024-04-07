@@ -20,7 +20,7 @@ This package bundles a selection of powerful tools and configurations to support
   and rules tailored for our projects.
 - **Easy Coding Standard Configuration**: Utilizes [Easy Coding Standard](https://github.com/symplify/coding-standard)
   for enforcing consistent coding styles and practices.
-- **PHPUnit 10/11 Support**: Ensures compatibility with [PHPUnit 10/11](https://phpunit.de) to facilitate comprehensive
+- **PHPUnit 10/11 Support**: Ensures compatibility with [PHPUnit](https://phpunit.de) to facilitate comprehensive
   testing.
 - **RectorPHP Configuration**: Provides configurations for [RectorPHP](https://getrector.org) for better code quality.
 - **Extended PHPStan Packages**: Includes additional packages to augment PHPStan's capabilities. For more details, see
@@ -39,10 +39,10 @@ Before installing, please ensure your environment meets the following requiremen
 
 **Only latest major version of this package is maintained.**
 
-| Compatibility | PHPUnit | PHPVersion |
-|---------------|---------|------------|
-| 1.x           | 10/11   | 8.1+       |
-| 0.x           | 9       | 8.1+       |
+| Compatibility | PHPUnit | PHP  |
+|---------------|---------|------|
+| 1.x           | 10/11   | 8.1+ |
+| 0.x           | 9       | 8.1+ |
 
 ## Installation
 
