@@ -25,6 +25,8 @@ This package bundles a selection of powerful tools and configurations to support
 - **Extended PHPStan Packages**: Includes additional packages to augment PHPStan's capabilities. For more details, see
   the included `composer.json` file.
 
+For Laravel use [LaraStrict conventions](https://github.com/larastrict/conventions).
+
 ## Prerequisites
 
 Before installing, please ensure your environment meets the following requirements:
@@ -110,3 +112,21 @@ parameters:
       - extension-ecs.php
       - extension-rector.php
 ```
+
+## Acknowledgement
+
+This project owes its existence to the generous support of several other impactful projects:
+
+- **[Canvastera](https://canvastera.com)** - Empowering users to craft multimedia posters and share them worldwide. (EDU/Hobby)
+- **[Azzurro Travel Agency](https://azzurro.cz)** - Specializing in holidays in Italy.
+- **[Redtag Studio](https://redtag.studio)** - Crafting digital products for your enjoyment.
+
+Explore more of our open-source initiatives:
+
+- **[Larastrict](https://larastrict.com)** - Enhancing the Laravel Framework with a suite of convenient tools and packages.
+- **[StrictPHP](https://strictphp.com)** - Enabling strictness in PHP projects through a curated set of packages and conventions, fostering the development of robust production-grade applications.
+- **[WrkFlow](https://wrk-flow.com)** - Streamlining development workflows with a comprehensive set of tools designed to boost efficiency.
+
+## License
+
+Open-source software licensed under the [MIT License](LICENSE.md). Feel free to use and modify it according to your needs.
