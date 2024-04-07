@@ -20,7 +20,8 @@ This package bundles a selection of powerful tools and configurations to support
   and rules tailored for our projects.
 - **Easy Coding Standard Configuration**: Utilizes [Easy Coding Standard](https://github.com/symplify/coding-standard)
   for enforcing consistent coding styles and practices.
-- **PHPUnit 9 Support**: Ensures compatibility with [PHPUnit 9](https://phpunit.de) to facilitate comprehensive testing.
+- **PHPUnit 10/11 Support**: Ensures compatibility with [PHPUnit 10/11](https://phpunit.de) to facilitate comprehensive
+  testing.
 - **RectorPHP Configuration**: Provides configurations for [RectorPHP](https://getrector.org) for better code quality.
 - **Extended PHPStan Packages**: Includes additional packages to augment PHPStan's capabilities. For more details, see
   the included `composer.json` file.
@@ -35,6 +36,13 @@ Before installing, please ensure your environment meets the following requiremen
 - Composer
 - Enabled [Extension installer for PHPStan](https://github.com/phpstan/extension-installer) - it is installed by our
   package to allow extension discovery.
+
+**Only latest major version of this package is maintained.**
+
+| Compatibility | PHPUnit | PHPVersion |
+|---------------|---------|------------|
+| 1.x           | 10/11   | 8.1+       |
+| 0.x           | 9       | 8.1+       |
 
 ## Installation
 
@@ -117,16 +125,21 @@ parameters:
 
 This project owes its existence to the generous support of several other impactful projects:
 
-- **[Canvastera](https://canvastera.com)** - Empowering users to craft multimedia posters and share them worldwide. (EDU/Hobby)
+- **[Canvastera](https://canvastera.com)** - Empowering users to craft multimedia posters and share them worldwide. (
+  EDU/Hobby)
 - **[Azzurro Travel Agency](https://azzurro.cz)** - Specializing in holidays in Italy.
 - **[Redtag Studio](https://redtag.studio)** - Crafting digital products for your enjoyment.
 
 Explore more of our open-source initiatives:
 
-- **[Larastrict](https://larastrict.com)** - Enhancing the Laravel Framework with a suite of convenient tools and packages.
-- **[StrictPHP](https://strictphp.com)** - Enabling strictness in PHP projects through a curated set of packages and conventions, fostering the development of robust production-grade applications.
-- **[WrkFlow](https://wrk-flow.com)** - Streamlining development workflows with a comprehensive set of tools designed to boost efficiency.
+- **[Larastrict](https://larastrict.com)** - Enhancing the Laravel Framework with a suite of convenient tools and
+  packages.
+- **[StrictPHP](https://strictphp.com)** - Enabling strictness in PHP projects through a curated set of packages and
+  conventions, fostering the development of robust production-grade applications.
+- **[WrkFlow](https://wrk-flow.com)** - Streamlining development workflows with a comprehensive set of tools designed to
+  boost efficiency.
 
 ## License
 
-Open-source software licensed under the [MIT License](LICENSE.md). Feel free to use and modify it according to your needs.
+Open-source software licensed under the [MIT License](LICENSE.md). Feel free to use and modify it according to your
+needs.
