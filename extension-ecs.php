@@ -14,9 +14,11 @@ return ECSConfig::configure()
         checkerClass: ClassAttributesSeparationFixer::class,
         configuration: [
             'elements' => [
-                'const' => 'only_if_meta',
-                'property' => 'one',
+                'const' => 'none',
+                'property' => 'none',
                 'method' => 'one',
+                'trait_import' => 'none',
+                'case' => 'none',
             ],
         ])
     ->withConfiguredRule(
@@ -25,4 +27,8 @@ return ECSConfig::configure()
             'after_heredoc' => true,
             'elements' => ['arguments', 'arrays', 'match', 'parameters'],
         ])
-    ->withSkip([YodaStyleFixer::class]);
+    ->withSkip([
+        PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer::class,
+        PhpCsFixer\Fixer\PhpTag\LinebreakAfterOpeningTagFixer::class,
+        YodaStyleFixer::class,
+    ]);
