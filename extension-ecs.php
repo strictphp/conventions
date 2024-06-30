@@ -5,11 +5,15 @@ declare(strict_types=1);
 use PhpCsFixer\Fixer\ClassNotation\ClassAttributesSeparationFixer;
 use PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer;
 use PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer;
+use PhpCsFixer\Fixer\Whitespace\IndentationTypeFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 
 return ECSConfig::configure()
     ->withParallel()
     ->withPreparedSets(common: true, symplify: true, cleanCode: true)
+	->withRules([
+		IndentationTypeFixer::class
+	])
     ->withConfiguredRule(
         checkerClass: ClassAttributesSeparationFixer::class,
         configuration: [
