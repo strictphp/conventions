@@ -7,3 +7,11 @@ parameters:
       - extension-ecs.php
       - extension-rector.php
       - tests
+
+  exceptions: #see https://www.youtube.com/watch?v=UQsP1U0sVZM
+      check:
+        missingCheckedExceptionInThrows: true
+        tooWideThrowType: true
+      implicitThrows: false
+      checkedExceptionClasses:
+        - App\Exception\RuntimeException
