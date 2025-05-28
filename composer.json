@@ -21,7 +21,7 @@
     },
     "scripts": {
         "analyse": "./vendor/bin/phpstan",
-        "check": [
+        "qa": [
             "@lint",
             "@test",
             "@analyse"
