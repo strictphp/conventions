@@ -37,12 +37,13 @@ Before installing, please ensure your environment meets the following requiremen
 - Enabled [Extension installer for PHPStan](https://github.com/phpstan/extension-installer) - it is installed by our
   package to allow extension discovery.
 
-**Only latest major version of this package is maintained.**
+**Only the latest major version of this package is maintained.**
 
-| Version | PHPUnit | PHP  |
-|---------|---------|------|
-| 1.x     | 10/11   | 8.1+ |
-| 0.x     | 9       | 8.1+ |
+| Version | PHPUnit  | PHP  |
+|---------|----------|------|
+| 2.x     | 10/11/13 | 8.3+ |
+| 1.x     | 10/11    | 8.1+ |
+| 0.x     | 9        | 8.1+ |
 
 ## Installation
 
