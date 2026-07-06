@@ -14,4 +14,4 @@ parameters:
         tooWideThrowType: true
       implicitThrows: false
       checkedExceptionClasses:
-        - App\Exception\RuntimeException
+        - StrictPhp\Conventions\Exception\RuntimeException
