@@ -43,6 +43,7 @@ jobs:
     uses: wrk-flow/reusable-workflows/.github/workflows/php-tests.yml@6ec0b91779b0bb58d6b9490f57c301e69b5020a1
     with:
       gistOnPhpVersion: "8.3"
+      gistID: 0b0340bf7e806524a632347d0b9219ea
       phpVersion: "${{ matrix.phpVersion }}"
     secrets: inherit
 
