@@ -29,18 +29,20 @@ jobs:
     name: "Code check"
     strategy:
       matrix:
-        phpVersion: [ "8.1", "8.2", "8.3" ]
+        phpVersion: [ "8.3", "8.4", "8.5" ]
     uses: wrk-flow/reusable-workflows/.github/workflows/php-check.yml@c6b6e93c92bb9a2be67e5f6f3c3ca8dcb3bec433
+    with:
+      phpVersion: "${{ matrix.phpVersion }}"
     secrets: inherit
 
   tests:
     name: "Run tests"
     strategy:
       matrix:
-        phpVersion: [ "8.1", "8.2", "8.3" ]
+        phpVersion: [ "8.3", "8.4", "8.5" ]
     uses: wrk-flow/reusable-workflows/.github/workflows/php-tests.yml@c6b6e93c92bb9a2be67e5f6f3c3ca8dcb3bec433
     with:
-      gistOnPhpVersion: "8.2"
+      gistOnPhpVersion: "8.3"
       phpVersion: "${{ matrix.phpVersion }}"
     secrets: inherit
 
