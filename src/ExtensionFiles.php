@@ -4,6 +4,6 @@ namespace StrictPhp\Conventions;
 
 final class ExtensionFiles
 {
-    public const Ecs = __DIR__ . '/../extension-ecs.php';
-    public const Rector = __DIR__ . '/../extension-rector.php';
+    public const string Ecs = __DIR__ . '/../extension-ecs.php';
+    public const string Rector = __DIR__ . '/../extension-rector.php';
 }

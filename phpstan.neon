@@ -6,3 +6,4 @@ parameters:
       - rector.php
       - extension-ecs.php
       - extension-rector.php
+      - tests

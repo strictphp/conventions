@@ -10,7 +10,7 @@ use Symplify\EasyCodingStandard\Config\ECSConfig;
 
 return ECSConfig::configure()
     ->withParallel()
-    ->withPreparedSets(common: true, symplify: true, cleanCode: true)
+    ->withPreparedSets(common: true, cleanCode: true)
 	->withRules([
 		IndentationTypeFixer::class
 	])
