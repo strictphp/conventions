@@ -6,6 +6,7 @@
 [![Total Downloads](https://poser.pugx.org/strictphp/conventions/downloads)](https://packagist.org/packages/strictphp/conventions)
 [![License](https://poser.pugx.org/strictphp/conventions/license)](https://packagist.org/packages/strictphp/conventions)
 [![PHP Version Require](https://poser.pugx.org/strictphp/conventions/require/php)](https://packagist.org/packages/strictphp/conventions)
+![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/pionl/0b0340bf7e806524a632347d0b9219ea/raw/coverage.json)
 
 Welcome to StrictPHP Conventions, a Composer package designed to standardize PHP code across various our projects. This
 package is an assembly of tools and configurations to enhance code quality, maintainability, and adherence to best
