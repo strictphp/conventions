@@ -30,7 +30,7 @@ jobs:
     strategy:
       matrix:
         phpVersion: [ "8.3", "8.4", "8.5" ]
-    uses: wrk-flow/reusable-workflows/.github/workflows/php-check.yml@c6b6e93c92bb9a2be67e5f6f3c3ca8dcb3bec433
+    uses: wrk-flow/reusable-workflows/.github/workflows/php-check.yml@6ec0b91779b0bb58d6b9490f57c301e69b5020a1
     with:
       phpVersion: "${{ matrix.phpVersion }}"
     secrets: inherit
@@ -40,7 +40,7 @@ jobs:
     strategy:
       matrix:
         phpVersion: [ "8.3", "8.4", "8.5" ]
-    uses: wrk-flow/reusable-workflows/.github/workflows/php-tests.yml@c6b6e93c92bb9a2be67e5f6f3c3ca8dcb3bec433
+    uses: wrk-flow/reusable-workflows/.github/workflows/php-tests.yml@6ec0b91779b0bb58d6b9490f57c301e69b5020a1
     with:
       gistOnPhpVersion: "8.3"
       phpVersion: "${{ matrix.phpVersion }}"
