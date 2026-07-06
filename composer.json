@@ -3,22 +3,6 @@
     "description": "Our code conventions forced by PHPStan, Easy Coding Standard, RectorPHP and appropriate custom rules and configs.",
     "type": "library",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Martin Kluska",
-            "email": "martin@kluska.cz"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "StrictPhp\\Conventions\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "StrictPhp\\ConventionsTests\\": "tests/"
-        }
-    },
     "scripts": {
         "analyse": "./vendor/bin/phpstan",
         "qa": [
@@ -40,15 +24,35 @@
     },
     "require": {
         "php": ">=8.3",
-        "phpstan/phpstan": "^2.0",
+        "phpstan/phpstan": "^2.2",
         "phpstan/phpstan-deprecation-rules": "^1.1.4 || ^2.",
         "phpstan/phpstan-phpunit": "^2.0",
-        "phpstan/phpdoc-parser": "^1.28.0 || ^2.3",
         "phpunit/phpunit": "^10.5 || ^11.0.1 || ^12.0 || ^13.2.0",
         "nikic/php-parser": "^v5.8.0",
-        "rector/rector": "^2.2.9",
+        "rector/rector": "^2.3.2",
         "symplify/easy-coding-standard": "^13.2.6",
         "phpstan/extension-installer": "^1.4.3"
+    },
+    "require-dev": {
+        "nesbot/carbon": "^3.13.0",
+        "phpstan/phpstan": "v2.2",
+        "phpstan/phpdoc-parser": "^2.2"
+    },
+    "authors": [
+        {
+            "name": "Martin Kluska",
+            "email": "martin@kluska.cz"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "StrictPhp\\Conventions\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "StrictPhp\\ConventionsTests\\": "tests/"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
