@@ -33,7 +33,6 @@ jobs:
     uses: wrk-flow/reusable-workflows/.github/workflows/php-check.yml@a175c9b9239a356b40362a649c790ced8efc9e42
     with:
       phpVersion: "${{ matrix.phpVersion }}"
-    secrets: inherit
 
   tests:
     name: "Run tests"
@@ -45,5 +44,6 @@ jobs:
       gistOnPhpVersion: "8.3"
       gistID: 0b0340bf7e806524a632347d0b9219ea
       phpVersion: "${{ matrix.phpVersion }}"
-    secrets: inherit
+    secrets:
+      GIST_SECRET: ${{ secrets.GIST_SECRET }}
 
