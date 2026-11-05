@@ -10,6 +10,7 @@ final class LogicException extends \LogicException
 {
     public function __construct(string $message, ?Throwable $previous = null)
     {
-        parent::__construct($message, $previous?->getCode() ?? 0, $previous);
+        $code = $previous?->getCode() ?? 0;
+        parent::__construct($message, is_int($code) ? $code : 0, $previous);
     }
 }
