@@ -87,6 +87,42 @@ The standard `composer qa` workflow runs Rector, ECS, PHPStan, then tests.
 It applies code transformations and formatting. The setup guide also lists
 read-only commands for CI.
 
+## Use the skills
+
+After AI sync, include a skill name and a concrete task in your coding agent's
+prompt. Installation configures the tools and skills. An adoption prompt asks
+the agent to update existing code.
+
+To adopt the conventions in an existing codebase:
+
+```text
+Use $strictphp to bring this project's existing code into compliance
+with the installed conventions.
+
+Inspect the codebase and apply the relevant skills and references.
+Preserve application behavior and project-specific instructions.
+
+Run Rector first, then ECS, then PHPStan, with tests last.
+Fix reported violations without disabling rules or adding baselines.
+Report changes and any remaining failures.
+```
+
+For a smaller change, name the code to review:
+
+```text
+Use $strictphp to review and fix src/Orders and its tests.
+Preserve existing behavior and validate the affected code.
+```
+
+For new work:
+
+```text
+Use $strictphp to implement [feature description].
+Follow the project's existing structure and add relevant tests.
+```
+
+For Laravel applications, use `$larastrict`, which extends `$strictphp`.
+
 ## Acknowledgement
 
 This project owes its existence to the generous support of several other impactful projects:
