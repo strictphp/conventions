@@ -50,7 +50,8 @@ Before installing, please ensure your environment meets the following requiremen
 
 ## Installation
 
-Copy this prompt into your coding agent:
+Ask your coding agent to summarize the proposed changes and validation plan
+before making changes. Use this prompt:
 
 ```text
 Set up StrictPHP Conventions in this project.
@@ -62,7 +63,8 @@ Read the project's existing agent and contribution instructions first.
 Inspect its PHP version, framework, dependencies, and tool configuration.
 
 Before running setup commands or changing files, summarize the proposed
-installation, including dependency, configuration, script, and AI file changes.
+installation, including dependency, configuration, script, and AI file changes,
+and the validation plan.
 Ask for permission to proceed and wait for the user's answer.
 After approval, follow the guide.
 
