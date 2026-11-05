@@ -58,7 +58,7 @@ final readonly class InstructionSync
         }
 
         ksort($sources);
-        $guidance = self::instructionText($this->resources . '/AGENTS.md') . "\n\n## Skills\n";
+        $guidance = self::instructionText($this->resources . '/AGENTS.md');
 
         foreach ($sources as $name => $registration) {
             $source = $registration['source'];
@@ -71,8 +71,7 @@ final readonly class InstructionSync
                 throw new RuntimeException('Missing SKILL.md for ' . $name);
             }
 
-            $description = self::skillDescription(self::read($source . '/SKILL.md'), $name);
-            $guidance .= "\n- [" . $name . '](.agents/skills/' . $name . '/SKILL.md): ' . $description;
+            self::validateSkill(self::read($source . '/SKILL.md'), $name);
             $directory = '.agents/skills/' . $name . '/';
             $skillDirectories[] = $directory;
             $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST);
@@ -93,7 +92,7 @@ final readonly class InstructionSync
             }
         }
 
-        foreach ($assets['instructions'] as $package => $paths) {
+        foreach ($assets['instructions'] as $paths) {
             $contents = [];
 
             foreach ($paths as $source) {
@@ -103,7 +102,7 @@ final readonly class InstructionSync
             }
 
             if ($contents !== []) {
-                $guidance .= "\n\n## " . $package . "\n\n" . implode("\n\n", $contents);
+                $guidance .= "\n\n" . implode("\n\n", $contents);
             }
         }
 
@@ -427,7 +426,7 @@ final readonly class InstructionSync
         return preg_match('~^\\.agents/skills/[a-z0-9]+(?:-[a-z0-9]+)*/.+$~D', $path) === 1;
     }
 
-    private static function skillDescription(string $contents, string $name): string
+    private static function validateSkill(string $contents, string $name): void
     {
         if (preg_match('/\\A---\\R(.*?)\\R---(?:\\R|$)/s', $contents, $frontmatter) !== 1
             || preg_match('/^name: *([^\\r\\n]+)$/m', $frontmatter[1], $skillName) !== 1
@@ -441,8 +440,6 @@ final readonly class InstructionSync
         if ($value === '' || in_array($value, ['|', '>', '|-', '>-', '|+', '>+'], true)) {
             throw new RuntimeException('Skill must declare a single-line description: ' . $name);
         }
-
-        return $value;
     }
 
     private static function replaceBlock(string $agents, string $startMarker, string $endMarker, string $block, bool $append = false): string
