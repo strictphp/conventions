@@ -23,7 +23,7 @@ Add skills to the root project's `composer.json` under `extra.strictphp/conventi
 
 Each `SKILL.md` must have single-line YAML `name` and `description` values. Its `name` must match the skill key. Skill paths must stay within the package or project. Skill files cannot be symlinks. The sync command reads `vendor/composer/installed.json` and the root project Composer metadata. It does not execute PHP from packages.
 
-The sync command installs the bundled StrictPHP skill, discovered package skills, and root project skills. It adds a short discovery block to the root `AGENTS.md`, preserving text outside the marked block. It writes skills to `.agents/skills/` and tracks generated files in `.agents/.strictphp-manifest.json`. The manifest records version 1, package ownership, and each generated file's hash. Edited generated files and duplicate skill names stop sync; skills cannot override one another.
+The sync command installs the bundled StrictPHP skill, discovered package skills, and root project skills. It collects package rules in the managed root `AGENTS.md` block, preserving text outside that block. It does not generate a skill catalog or copy skill descriptions into `AGENTS.md`. The harness discovers installed skills from their `SKILL.md` metadata. It writes skills to `.agents/skills/` and tracks generated files in `.agents/.strictphp-manifest.json`. The Composer `skills` map registers files for installation; it is not a skill routing table for `AGENTS.md`. The manifest records version 1, package ownership, and each generated file's hash. Edited generated files and duplicate skill names stop sync; skills cannot override one another.
 
 Keep local instructions outside the generated block.
 
@@ -31,7 +31,9 @@ Keep local instructions outside the generated block.
 
 Packages and the root project can register Markdown files in `extra["strictphp/conventions"].instructions`. Use a list of paths relative to the package or project root. A package can provide instructions without skills. These files must exist inside that root and cannot use symlinks or sync markers. The generated root `AGENTS.md` cannot also be an input; use a separate source file such as `resources/ai/AGENTS.md`.
 
-StrictPHP provides the shared baseline from `resources/ai/AGENTS.md`. Sync reads the registered files and adds their content to the generated root `AGENTS.md` block, under each package name. Package names are sorted; files within a package keep their registered order. The root project's registrations use the same format. Keep project-specific overrides outside the generated block or in directory instructions.
+Start each instruction file with its own package title as a level-one heading, followed by MUST USE and DON'T USE sections. Keep only the most important package rules there. A short directive may name `$strictphp`, `$larastrict`, or relevant package skills for implementation work. Put detailed conventions, exceptions, examples, and task workflows in the skills and their focused references. Do not add a skill catalog or repeat descriptions in `AGENTS.md`.
+
+StrictPHP provides the shared baseline from `resources/ai/AGENTS.md`. Sync reads the registered files and adds their content to the generated root `AGENTS.md` block without adding headings of its own. Package-authored titles and their MUST USE and DON'T USE sections are preserved unchanged. Packages are sorted by name; files within a package keep their registered order. The root project's registrations use the same format. Keep project-specific overrides outside the generated block or in directory instructions.
 
 Changes and removed registrations are detected by `--check`. The next sync updates or removes that package's section. Links in instruction fragments resolve from the consumer's root `AGENTS.md`, so use paths such as `.agents/skills/project-api/SKILL.md`.
 

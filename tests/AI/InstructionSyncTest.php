@@ -71,7 +71,7 @@ final class InstructionSyncTest extends TestCase
         $sync->execute($this->project);
         file_put_contents($this->project . '/AGENTS.md', "\nLocal exception.\n", FILE_APPEND);
         unlink($this->resources . '/strictphp/references/data.md');
-        file_put_contents($this->resources . '/strictphp/SKILL.md', "---\nname: strictphp\ndescription: MUST USE the updated rule.\n---\n");
+        file_put_contents($this->resources . '/AGENTS.md', 'MUST USE the updated rule.');
         $sync->execute($this->project);
         self::assertFileDoesNotExist($this->project . '/.agents/skills/strictphp/references/data.md');
         self::assertStringEndsWith("\nLocal exception.\n", (string) file_get_contents($this->project . '/AGENTS.md'));
@@ -82,7 +82,7 @@ final class InstructionSyncTest extends TestCase
         $sync = new InstructionSync($this->resources);
         $sync->execute($this->project);
         file_put_contents($this->project . '/.agents/skills/strictphp/references/data.md', 'Local change');
-        file_put_contents($this->resources . '/strictphp/SKILL.md', "---\nname: strictphp\ndescription: Changed package rules\n---\n");
+        file_put_contents($this->resources . '/AGENTS.md', 'Changed package rules');
 
         try {
             $sync->execute($this->project);
@@ -193,7 +193,7 @@ final class InstructionSyncTest extends TestCase
         self::assertFileDoesNotExist($this->project . '/' . $target);
         $sync->execute($this->project);
         self::assertSame("---\nname: strictphp-conventions-sdk\ndescription: SDK guidance\n---\nSDK guidance", file_get_contents($this->project . '/' . $target));
-        self::assertStringContainsString('[strictphp-conventions-sdk](.agents/skills/strictphp-conventions-sdk/SKILL.md)', (string) file_get_contents($this->project . '/AGENTS.md'));
+        self::assertStringNotContainsString('[strictphp-conventions-sdk](.agents/skills/strictphp-conventions-sdk/SKILL.md)', (string) file_get_contents($this->project . '/AGENTS.md'));
         self::assertSame([], $sync->execute($this->project, true));
         file_put_contents($package . '/resources/ai/strictphp-conventions-sdk/SKILL.md', "---\nname: strictphp-conventions-sdk\ndescription: SDK guidance\n---\nUpdated SDK guidance");
         self::assertContains($target, $sync->execute($this->project, true));
@@ -221,6 +221,42 @@ final class InstructionSyncTest extends TestCase
         file_put_contents($metadata, $installed);
         $sync->execute($this->project);
         self::assertSame('Body guidance', file_get_contents($this->project . '/.agents/skills/strictphp-conventions-sdk/references/body.md'));
+        self::assertSame([], $sync->execute($this->project, true));
+    }
+
+    public function testSkillMetadataUpdatesDoNotAddACatalogToAgents(): void
+    {
+        $package = $this->registerPackage('vendor/sdk');
+        $sync = new InstructionSync($this->resources);
+        $sync->execute($this->project);
+        $agents = file_get_contents($this->project . '/AGENTS.md');
+        self::assertIsString($agents);
+        self::assertStringNotContainsString('## Skills', $agents);
+        self::assertStringNotContainsString('SDK guidance', $agents);
+        $contents = "---\nname: strictphp-conventions-sdk\ndescription: Revised SDK description\n---\nUpdated skill workflow.\n";
+        file_put_contents($package . '/resources/ai/strictphp-conventions-sdk/SKILL.md', $contents);
+        $changes = $sync->execute($this->project, true);
+        self::assertContains('.agents/skills/strictphp-conventions-sdk/SKILL.md', $changes);
+        self::assertNotContains('AGENTS.md', $changes);
+        $sync->execute($this->project);
+        self::assertSame($agents, file_get_contents($this->project . '/AGENTS.md'));
+        self::assertSame($contents, file_get_contents($this->project . '/.agents/skills/strictphp-conventions-sdk/SKILL.md'));
+    }
+
+    public function testAllPackageRulesAreCollectedWithoutSkillMetadata(): void
+    {
+        $package = $this->registerInstructions('vendor/laravel', ['resources/ai/AGENTS.md']);
+        $rules = "# Laravel rules\n\n## MUST USE\n\n- Keep persistence in Queries.\n\n## Controllers\n\nControllers may implement focused endpoint workflows.\n\n## DON'T USE\n\n- Do not use raw models as layer transport.\n";
+        file_put_contents($package . '/resources/ai/AGENTS.md', $rules);
+        $sync = new InstructionSync($this->resources);
+        $sync->execute($this->project);
+        $agents = file_get_contents($this->project . '/AGENTS.md');
+        self::assertIsString($agents);
+        self::assertStringContainsString(trim($rules), $agents);
+        self::assertSame(1, substr_count($agents, "# Laravel rules\n"));
+        self::assertStringNotContainsString('## vendor/laravel', $agents);
+        self::assertStringNotContainsString('## Skills', $agents);
+        self::assertFileExists($this->project . '/.agents/skills/strictphp/SKILL.md');
         self::assertSame([], $sync->execute($this->project, true));
     }
 
@@ -317,7 +353,7 @@ final class InstructionSyncTest extends TestCase
         self::assertIsArray($manifest['files']);
         self::assertIsArray($manifest['files']['.agents/skills/api-sdk-builder/SKILL.md']);
         self::assertSame('example/project', $manifest['files']['.agents/skills/api-sdk-builder/SKILL.md']['package']);
-        self::assertStringContainsString('Build API clients.', (string) file_get_contents($this->project . '/AGENTS.md'));
+        self::assertStringNotContainsString('Build API clients.', (string) file_get_contents($this->project . '/AGENTS.md'));
         self::assertStringNotContainsString('Larastrict', (string) file_get_contents($this->project . '/AGENTS.md'));
         self::assertSame([], $sync->execute($this->project, true));
     }
@@ -384,7 +420,7 @@ final class InstructionSyncTest extends TestCase
         self::assertContains('AGENTS.md', $sync->execute($this->project, true));
         self::assertSame($before, file_get_contents($this->project . '/AGENTS.md'));
         $sync->execute($this->project);
-        self::assertStringContainsString("## vendor/sdk\n\nPreserve external field names.", (string) file_get_contents($this->project . '/AGENTS.md'));
+        self::assertStringContainsString('Preserve external field names.', (string) file_get_contents($this->project . '/AGENTS.md'));
         self::assertFileDoesNotExist($this->project . '/.agents/skills/strictphp-conventions-sdk/SKILL.md');
         self::assertSame([], $sync->execute($this->project, true));
 
@@ -409,7 +445,8 @@ final class InstructionSyncTest extends TestCase
         file_put_contents($this->project . '/AGENTS.md', "\nLocal override.\n", FILE_APPEND);
         self::assertSame([], $sync->execute($this->project, true));
         $agents = (string) file_get_contents($this->project . '/AGENTS.md');
-        self::assertStringContainsString("## example/project\n\nSecond instruction.\n\nFirst instruction.", $agents);
+        self::assertStringContainsString("Second instruction.\n\nFirst instruction.", $agents);
+        self::assertStringNotContainsString('## example/project', $agents);
         self::assertStringEndsWith("\nLocal override.\n", $agents);
     }
 
