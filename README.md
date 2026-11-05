@@ -21,7 +21,7 @@ This package bundles a selection of powerful tools and configurations to support
   and rules tailored for our projects.
 - **Easy Coding Standard Configuration**: Utilizes [Easy Coding Standard](https://github.com/symplify/coding-standard)
   for enforcing consistent coding styles and practices.
-- **PHPUnit 10/11 Support**: Ensures compatibility with [PHPUnit](https://phpunit.de) to facilitate comprehensive
+- **PHPUnit Support**: Ensures compatibility with [PHPUnit](https://phpunit.de) to facilitate comprehensive
   testing.
 - **RectorPHP Configuration**: Provides configurations for [RectorPHP](https://getrector.org) for better code quality.
 - **Extended PHPStan Packages**: Includes additional packages to augment PHPStan's capabilities. For more details, see
@@ -29,11 +29,13 @@ This package bundles a selection of powerful tools and configurations to support
 
 For Laravel use [LaraStrict conventions](https://github.com/larastrict/conventions).
 
+See [AI agent setup](docs/ai-agents.md) to install the shared PHP skill and discover skills from Composer packages and the root project.
+
 ## Prerequisites
 
 Before installing, please ensure your environment meets the following requirements:
 
-- PHP version 8.1 or higher.
+- PHP version 8.3 or higher for the current package.
 - Composer
 - Enabled [Extension installer for PHPStan](https://github.com/phpstan/extension-installer) - it is installed by our
   package to allow extension discovery.
@@ -42,86 +44,48 @@ Before installing, please ensure your environment meets the following requiremen
 
 | Version | PHPUnit  | PHP  |
 |---------|----------|------|
-| 2.x     | 10/11/13 | 8.3+ |
+| 2.x     | 10–13    | 8.3+ |
 | 1.x     | 10/11    | 8.1+ |
 | 0.x     | 9        | 8.1+ |
 
 ## Installation
 
-To incorporate StrictPHP Conventions into your project, simply run the following command in your terminal:
+Copy this prompt into your coding agent:
 
-```bash
-composer require strictphp/conventions --dev
+```text
+Set up StrictPHP Conventions in this project.
+
+Fetch and follow:
+https://raw.githubusercontent.com/strictphp/conventions/main/doc/setup-guide.md
+
+Read the project's existing agent and contribution instructions first.
+Inspect its PHP version, framework, dependencies, and tool configuration.
+
+Set up the development dependencies, Rector, ECS, PHPStan, Composer scripts,
+and AI instruction sync. For Laravel projects, use larastrict/conventions,
+which extends strictphp/conventions.
+
+Merge existing configuration and Composer hooks. Preserve project-specific
+settings and the existing test runner.
+
+Use the recommended Composer script names and execution order from the guide:
+Rector → ECS → PHPStan → tests.
+
+Run the resulting QA workflow. Resolve setup problems and report remaining
+code violations or blocked checks. Do not disable rules or generate baselines
+just to make the checks pass.
+
+Summarize the changes and validation results.
 ```
 
-This will install the package as a development dependency. You will be asked to confirm the installation of the plugin:
+For manual installation, follow the [setup guide](doc/setup-guide.md).
+The guide covers dependencies, tool configuration, Composer scripts, AI sync,
+and validation. See the [AI setup reference](docs/ai-agents.md) to distribute
+additional package instructions and skills.
 
-> Do you trust "phpstan/extension-installer" to execute code and wish to enable it now? (yes/no) [y]:
-
-Type `y` to use all the extensions provided by the package.
-
-## Getting Started
-
-After installation, you can extend the provided configurations to suit your project's specific needs.
-
-### Setting Up Easy Coding Standard
-
-To use the Easy Coding Standard, create an `ecs.php` file at your project's root with this setup or update your
-configuration:
-
-```php
-<?php
-
-declare(strict_types=1);
-
-use Symplify\EasyCodingStandard\Config\ECSConfig;
-
-return ECSConfig::configure()
-    ->withRootFiles()
-    ->withPaths([
-        __DIR__ . '/src',
-        __DIR__ . '/tests',
-    ])
-    // This is required to include the StrictPHP Conventions
-    ->withSets([\StrictPhp\Conventions\ExtensionFiles::Ecs]);
-```
-
-### Configuring RectorPHP
-
-For integrating RectorPHP, add a `rector.php` file in your project's root with the following configuration or update
-your configuration :
-
-```php
-<?php
-
-declare(strict_types=1);
-
-use Rector\Config\RectorConfig;
-
-return RectorConfig::configure()
-    ->withRootFiles()
-    ->withPaths([
-        __DIR__ . '/src',
-        __DIR__ . '/tests',
-    ])
-    // This is required to include the StrictPHP Conventions
-    ->withSets([\StrictPhp\Conventions\ExtensionFiles::Rector]);
-```
-
-### Integrating PHPStan
-
-It is required you to use phpstan extension installer to install the required extensions. This is recommended setup:
-
-```neon
-parameters:
-  level: max
-  paths:
-      - src
-      - ecs.php
-      - rector.php
-      - extension-ecs.php
-      - extension-rector.php
-```
+The standard `composer qa` workflow runs Rector, ECS, PHPStan, then tests.
+It applies code transformations and formatting. The setup guide also lists
+read-only commands for CI.
 
 ## Acknowledgement
 

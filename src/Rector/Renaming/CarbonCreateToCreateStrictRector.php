@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace StrictPhp\Conventions\Rector\Renaming;
 
@@ -29,7 +27,7 @@ CODE_BEFORE
                     <<<'CODE_AFTER'
 Carbon\Carbon::createStrict(year: 2023, day: 20);
 CODE_AFTER
-,
+                    ,
                 ),
             ],
         );
