@@ -5,6 +5,15 @@
 Use this guide to install the tools and AI instructions in a PHP project. For a
 Laravel project, use `larastrict/conventions`, which extends StrictPHP.
 
+## Approval before setup
+
+For an AI-assisted installation, read this guide and inspect the project without
+changing files or running setup commands. Summarize the proposed dependencies,
+configuration, Composer scripts, and generated AI files. Ask for permission to
+perform the installation and wait for an explicit answer before proceeding.
+This approval covers setup and validation. Ask separately before an upgrade
+session that changes existing application code.
+
 ## 1. Inspect the project
 
 Read the project's applicable `AGENTS.md` and `CONTRIBUTING.md` files. Check its
@@ -192,12 +201,12 @@ sync conflict occurs. Move local guidance out of generated files before retrying
 The [AI setup reference](../docs/ai-agents.md) explains how packages and the root
 project can register additional instructions and skills.
 
-## 7. Apply the conventions and validate
+## 7. Validate the setup
 
-Run `composer qa`. Review Rector's code transformations and ECS's formatting
-changes. After class renames, move files to match their PSR-4 names before running
-PHPStan. Resolve setup errors and code violations, then rerun affected checks in
-the order Rector, ECS, PHPStan, and tests.
+Run the read-only tool checks and the existing test runner listed below. Resolve
+setup errors and rerun affected checks in the order Rector, ECS, PHPStan, and
+tests. During installation, report existing code violations without applying
+code transformations or fixing application code.
 
 If an existing project has more violations than the requested adoption scope,
 report them separately from setup errors. Do not report QA as passing while
@@ -223,3 +232,17 @@ requires.
 Report the installed packages, configuration and script changes, generated AI
 files, passing checks, and any failed or blocked checks. Installing configuration
 and resolving every violation in an existing application are separate outcomes.
+
+## Optional upgrade session
+
+After installation and its validation report, ask: "Would you like to start an
+upgrade session using `$strictphp` to bring the existing code into compliance?"
+For a Laravel project, use `$larastrict`, which extends `$strictphp`.
+Wait for the user's answer. Installation approval alone does not authorize this
+upgrade session.
+
+If approved, agree on the scope and use the main skill with the relevant package
+skills. Preserve application behavior. Run Rector first, then ECS, then PHPStan,
+with tests last. Review transformations and move renamed files to their PSR-4
+paths before PHPStan runs. Use `composer qa` for the agreed scope when appropriate;
+it applies code changes. Report changes and any remaining failed or blocked checks.
