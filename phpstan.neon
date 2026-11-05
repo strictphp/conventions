@@ -1,4 +1,7 @@
 parameters:
+  bootstrapFiles:
+      - vendor/symplify/easy-coding-standard/vendor/autoload.php
+
   level: max
   paths:
       - src

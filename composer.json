@@ -7,12 +7,12 @@
         "analyse": "./vendor/bin/phpstan",
         "qa": [
             "@lint",
-            "@test",
-            "@analyse"
+            "@analyse",
+            "@test"
         ],
         "lint": [
-            "@lint:fix",
-            "@lint:upgrade"
+            "@lint:upgrade",
+            "@lint:fix"
         ],
         "lint:check": "./vendor/bin/ecs",
         "lint:fix": "./vendor/bin/ecs --fix",
@@ -35,7 +35,8 @@
     },
     "require-dev": {
         "nesbot/carbon": "^3.13.0",
-        "phpstan/phpdoc-parser": "^2.2"
+        "phpstan/phpdoc-parser": "^2.2",
+        "symfony/process": "^7.0 || ^8.0"
     },
     "authors": [
         {
@@ -60,11 +61,19 @@
             "includes": [
                 "extension.neon"
             ]
+        },
+        "strictphp/conventions": {
+            "instructions": [
+                "resources/ai/AGENTS.md"
+            ]
         }
     },
     "config": {
         "allow-plugins": {
             "phpstan/extension-installer": true
         }
-    }
+    },
+    "bin": [
+        "bin/strictphp-sync-ai"
+    ]
 }

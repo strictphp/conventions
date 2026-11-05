@@ -1,0 +1,41 @@
+#!/usr/bin/env php
+<?php declare(strict_types=1);
+
+use StrictPhp\Conventions\AI\InstructionSync;
+
+require_once __DIR__ . '/../src/AI/InstructionSync.php';
+
+$argv ??= [];
+$argc = count($argv);
+$project = getcwd();
+$check = false;
+
+try {
+    for ($index = 1; $index < $argc; ++$index) {
+        if ($argv[$index] === '--check') {
+            $check = true;
+        } elseif ($argv[$index] === '--project' && isset($argv[$index + 1])) {
+            $project = $argv[++$index];
+        } elseif ($argv[$index] === '--help') {
+            fwrite(STDOUT, "Usage: strictphp-sync-ai [--check] [--project PATH]\n");
+            exit(0);
+        } else {
+            throw new RuntimeException('Unknown or incomplete argument: ' . $argv[$index]);
+        }
+    }
+
+    if ($project === false) {
+        throw new RuntimeException('Cannot determine project directory.');
+    }
+
+    $changes = (new InstructionSync(__DIR__ . '/../resources/ai'))->execute($project, $check);
+
+    foreach ($changes as $path) {
+        fwrite(STDOUT, ($check ? 'Stale: ' : 'Updated: ') . $path . "\n");
+    }
+
+    exit($check && $changes !== [] ? 1 : 0);
+} catch (Throwable $exception) {
+    fwrite(STDERR, $exception->getMessage() . "\n");
+    exit(1);
+}
